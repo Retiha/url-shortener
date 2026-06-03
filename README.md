@@ -1,80 +1,81 @@
 # 🔗 LinkSnap — URL Shortener with Analytics
-
 A full-stack URL shortening platform with click analytics, built for the Katomaran Hackathon.
 
-> **This project is a part of a hackathon run by https://katomaran.com**
+> This project is a part of a hackathon run by https://katomaran.com
 
 ---
 
 ## 🚀 Live Demo
 
-> Record your Loom/YouTube demo and paste the link here.
+🎥 **Demo Video:** [Paste your Loom video link here]
+
+🌐 **Live Frontend:** https://url-shortener-ge13.vercel.app
+
+⚙️ **Live Backend:** https://url-shortener-see3.onrender.com
 
 ---
 
 ## 🏗️ Architecture Diagram
 
-```
 ┌─────────────────┐          ┌──────────────────────┐         ┌─────────────────┐
-│   React Frontend │ ←REST→  │  Node.js/Express API  │ ←ODM→  │    MongoDB       │
-│   (Port 3000)    │         │     (Port 5000)        │        │  (localhost)     │
+│  React Frontend  │ ←REST→  │  Node.js/Express API  │ ←ODM→  │    MongoDB       │
+│   (Vercel)       │         │     (Render)           │        │  (MongoDB Atlas) │
 └─────────────────┘          └──────────────────────┘         └─────────────────┘
-        ↑                            ↑
-   react-router-dom            JWT Auth Middleware
-   recharts (charts)           bcryptjs (hashing)
-   qrcode.react (QR)           nanoid (short codes)
-```
-
+↑                            ↑
+react-router-dom            JWT Auth Middleware
+recharts (charts)           bcryptjs (hashing)
+qrcode.react (QR)           nanoid (short codes)
 ---
 
 ## ✅ Features Implemented
 
 ### Mandatory
-- [x] **Authentication** — Signup, Login, JWT-protected routes
-- [x] **URL Shortening** — Unique short codes via nanoid, URL validation
-- [x] **User Dashboard** — View all links, original URL, short URL, created date, click count
-- [x] **Delete** shortened URLs
-- [x] **Copy** short URL from UI
+- ✅ **Authentication** — Signup, Login, JWT-protected routes
+- ✅ **URL Shortening** — Unique short codes via nanoid, URL validation
+- ✅ **User Dashboard** — View all links, original URL, short URL, created date, click count
+- ✅ **Delete** shortened URLs
+- ✅ **Copy** short URL from UI
 
 ### Analytics
-- [x] Click count per short URL
-- [x] Timestamp of each visit
-- [x] Analytics page per URL
-- [x] Total click count, last visited, recent history (last 10)
-- [x] Browser breakdown (Chrome, Firefox, Safari, Edge)
-- [x] Device breakdown (Desktop, Mobile, Tablet)
-- [x] Daily clicks chart (last 30 days)
+- ✅ Click count per short URL
+- ✅ Timestamp of each visit
+- ✅ Analytics page per URL
+- ✅ Total click count, last visited, recent history (last 10)
+- ✅ Browser breakdown (Chrome, Firefox, Safari, Edge)
+- ✅ Device breakdown (Desktop, Mobile, Tablet)
+- ✅ Daily clicks chart (last 30 days)
 
 ### UI
-- [x] Responsive interface
-- [x] Clean dark dashboard layout
-- [x] Loading, success, error states
-- [x] Form validation messages
+- ✅ Responsive interface
+- ✅ Clean dark dashboard layout
+- ✅ Loading, success, and error states
+- ✅ Form validation messages
 
 ### Bonus
-- [x] Custom alias for short URL
-- [x] QR code generation per link
-- [x] Expiry date for links
-- [x] Device/browser analytics
-- [x] Charts for daily click trends
-- [x] Edit destination URL
-- [x] Search/filter links
+- ✅ Custom alias for short URL
+- ✅ QR code generation per link
+- ✅ Expiry date for links
+- ✅ Device/browser analytics
+- ✅ Charts for daily click trends
+- ✅ Edit destination URL
+- ✅ Search/filter links
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer       | Technology                        |
-|-------------|-----------------------------------|
-| Frontend    | React 18, React Router v6         |
-| Styling     | Custom CSS, Google Fonts (Syne)   |
-| Charts      | Recharts                          |
-| QR Codes    | qrcode.react                      |
-| Backend     | Node.js + Express.js              |
-| Database    | MongoDB + Mongoose ODM            |
-| Auth        | JWT (jsonwebtoken) + bcryptjs     |
-| URL Codes   | nanoid                            |
-| Security    | helmet, express-rate-limit, cors  |
+| Layer      | Technology                          |
+|------------|-------------------------------------|
+| Frontend   | React 18, React Router v6           |
+| Styling    | Custom CSS, Google Fonts (Syne)     |
+| Charts     | Recharts                            |
+| QR Codes   | qrcode.react                        |
+| Backend    | Node.js + Express.js                |
+| Database   | MongoDB + Mongoose ODM              |
+| Auth       | JWT (jsonwebtoken) + bcryptjs       |
+| URL Codes  | nanoid                              |
+| Security   | helmet, express-rate-limit, cors    |
+| Deployment | Vercel (Frontend), Render (Backend), MongoDB Atlas (DB) |
 
 ---
 
@@ -101,7 +102,7 @@ cp .env.example .env
 # Edit .env with your values:
 #   MONGODB_URI=mongodb://localhost:27017/urlshortener
 #   JWT_SECRET=your_secret_key_here
-#   BASE_URL=http://localhost:5000
+#   BASE_URL=https://url-shortener-see3.onrender.com
 #   PORT=5000
 
 npm start
@@ -114,7 +115,7 @@ cd frontend
 npm install
 
 # Create .env
-echo "REACT_APP_API_URL=http://localhost:5000/api" > .env
+echo "REACT_APP_API_URL=https://url-shortener-see3.onrender.com/api" > .env
 
 npm start
 # Frontend runs on http://localhost:3000
@@ -124,26 +125,26 @@ npm start
 
 ## 🔌 API Endpoints
 
-| Method | Endpoint                    | Auth | Description                  |
-|--------|-----------------------------|------|------------------------------|
-| POST   | /api/auth/signup            | No   | Register new user            |
-| POST   | /api/auth/login             | No   | Login, get JWT               |
-| GET    | /api/auth/me                | Yes  | Get current user             |
-| POST   | /api/urls                   | Yes  | Create short URL             |
-| GET    | /api/urls                   | Yes  | Get all user's URLs          |
-| GET    | /api/urls/:id/analytics     | Yes  | Get analytics for URL        |
-| PUT    | /api/urls/:id               | Yes  | Update URL                   |
-| DELETE | /api/urls/:id               | Yes  | Delete URL                   |
-| GET    | /r/:code                    | No   | Redirect to original URL     |
+| Method | Endpoint                  | Auth | Description              |
+|--------|---------------------------|------|--------------------------|
+| POST   | /api/auth/signup          | No   | Register new user        |
+| POST   | /api/auth/login           | No   | Login, get JWT           |
+| GET    | /api/auth/me              | Yes  | Get current user         |
+| POST   | /api/urls                 | Yes  | Create short URL         |
+| GET    | /api/urls                 | Yes  | Get all user's URLs      |
+| GET    | /api/urls/:id/analytics   | Yes  | Get analytics for URL    |
+| PUT    | /api/urls/:id             | Yes  | Update URL               |
+| DELETE | /api/urls/:id             | Yes  | Delete URL               |
+| GET    | /r/:code                  | No   | Redirect to original URL |
 
 ---
 
 ## 🔒 Security
 
-- Passwords hashed with bcryptjs (12 salt rounds)
-- JWT tokens for stateless authentication
+- Passwords hashed with **bcryptjs** (12 salt rounds)
+- **JWT tokens** for stateless authentication
 - Rate limiting (100 req / 15 min per IP)
-- Helmet.js for HTTP security headers
+- **Helmet.js** for HTTP security headers
 - CORS configured for allowed origins
 - Backend validation on all inputs
 - No external URL shortening service used
@@ -152,18 +153,17 @@ npm start
 
 ## 📐 Assumptions Made
 
-1. Short codes are 7 characters (alphanumeric) generated via nanoid
-2. Custom aliases must be alphanumeric with hyphens/underscores
-3. Analytics store last N clicks in the URL document (embedded for performance)
-4. Each user can only manage their own URLs (no admin panel)
-5. URL redirect uses HTTP 301 (permanent redirect)
-6. MongoDB is used as the database (not PostgreSQL)
+- Short codes are 7 characters (alphanumeric) generated via nanoid
+- Custom aliases must be alphanumeric with hyphens/underscores
+- Analytics store last N clicks in the URL document (embedded for performance)
+- Each user can only manage their own URLs (no admin panel)
+- URL redirect uses HTTP 301 (permanent redirect)
+- MongoDB is used as the database (not PostgreSQL)
 
 ---
 
 ## 📁 Project Structure
 
-```
 urlshort/
 ├── backend/
 │   ├── middleware/
@@ -175,25 +175,41 @@ urlshort/
 │   │   ├── auth.js          # Auth endpoints
 │   │   └── urls.js          # URL CRUD + analytics
 │   ├── server.js            # Express app + redirect
-│   └── .env
+│   └── .env.example
 └── frontend/
-    └── src/
-        ├── context/
-        │   └── AuthContext.js
-        ├── pages/
-        │   ├── Landing.js
-        │   ├── Login.js
-        │   ├── Signup.js
-        │   ├── Dashboard.js
-        │   ├── URLs.js
-        │   └── Analytics.js
-        ├── services/
-        │   └── api.js
-        ├── styles/
-        │   └── global.css
-        └── App.js
-```
+└── src/
+├── context/
+│   └── AuthContext.js
+├── pages/
+│   ├── Landing.js
+│   ├── Login.js
+│   ├── Signup.js
+│   ├── Dashboard.js
+│   ├── URLs.js
+│   └── Analytics.js
+├── services/
+│   └── api.js
+├── styles/
+│   └── global.css
+└── App.js
 
 ---
 
-*This project is a part of a hackathon run by https://katomaran.com*
+## 🤖 AI Planning Document
+
+### How AI Was Used
+- Claude (Anthropic) was used to generate the full-stack boilerplate, component structure, API design, and MongoDB schema
+- Prompts were structured around the hackathon requirements, broken into backend, frontend, and deployment phases
+- All generated code was reviewed, tested, and understood before submission
+
+### Planning Steps
+1. Broke down the problem statement into backend models, API routes, and frontend pages
+2. Designed the MongoDB schema for User and URL with embedded analytics
+3. Built backend auth and URL routes with JWT middleware
+4. Built React frontend with protected routes and context-based auth
+5. Added bonus features: QR codes, custom aliases, expiry dates, charts
+6. Deployed frontend to Vercel and backend to Render
+
+---
+
+> This project is a part of a hackathon run by https://katomaran.com
