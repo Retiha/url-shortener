@@ -11,6 +11,7 @@ const urlRoutes = require('./routes/urls');
 const Url = require('./models/Url');
 
 const app = express();
+app.set('trust proxy', 1);
 
 // Security middleware
 app.use(helmet({ contentSecurityPolicy: false }));
