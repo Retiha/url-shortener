@@ -1,4 +1,5 @@
 # 🔗 LinkSnap — URL Shortener with Analytics
+
 A full-stack URL shortening platform with click analytics, built for the Katomaran Hackathon.
 
 > This project is a part of a hackathon run by https://katomaran.com
@@ -16,7 +17,6 @@ A full-stack URL shortening platform with click analytics, built for the Katomar
 ---
 
 ## 🏗️ Architecture Diagram
-
 ┌─────────────────┐          ┌──────────────────────┐         ┌─────────────────┐
 │  React Frontend  │ ←REST→  │  Node.js/Express API  │ ←ODM→  │    MongoDB       │
 │   (Vercel)       │         │     (Render)           │        │  (MongoDB Atlas) │
@@ -25,6 +25,7 @@ A full-stack URL shortening platform with click analytics, built for the Katomar
 react-router-dom            JWT Auth Middleware
 recharts (charts)           bcryptjs (hashing)
 qrcode.react (QR)           nanoid (short codes)
+
 ---
 
 ## ✅ Features Implemented
@@ -64,18 +65,18 @@ qrcode.react (QR)           nanoid (short codes)
 
 ## 🛠️ Tech Stack
 
-| Layer      | Technology                          |
-|------------|-------------------------------------|
-| Frontend   | React 18, React Router v6           |
-| Styling    | Custom CSS, Google Fonts (Syne)     |
-| Charts     | Recharts                            |
-| QR Codes   | qrcode.react                        |
-| Backend    | Node.js + Express.js                |
-| Database   | MongoDB + Mongoose ODM              |
-| Auth       | JWT (jsonwebtoken) + bcryptjs       |
-| URL Codes  | nanoid                              |
-| Security   | helmet, express-rate-limit, cors    |
-| Deployment | Vercel (Frontend), Render (Backend), MongoDB Atlas (DB) |
+| Layer      | Technology                                                  |
+|------------|-------------------------------------------------------------|
+| Frontend   | React 18, React Router v6                                   |
+| Styling    | Custom CSS, Google Fonts (Syne)                             |
+| Charts     | Recharts                                                    |
+| QR Codes   | qrcode.react                                                |
+| Backend    | Node.js + Express.js                                        |
+| Database   | MongoDB + Mongoose ODM                                      |
+| Auth       | JWT (jsonwebtoken) + bcryptjs                               |
+| URL Codes  | nanoid                                                      |
+| Security   | helmet, express-rate-limit, cors                            |
+| Deployment | Vercel (Frontend), Render (Backend), MongoDB Atlas (DB)     |
 
 ---
 
@@ -97,16 +98,14 @@ cd urlshort
 cd backend
 npm install
 
-# Create .env file
 cp .env.example .env
-# Edit .env with your values:
+# Edit .env:
 #   MONGODB_URI=mongodb://localhost:27017/urlshortener
 #   JWT_SECRET=your_secret_key_here
 #   BASE_URL=https://url-shortener-see3.onrender.com
 #   PORT=5000
 
 npm start
-# Backend runs on http://localhost:5000
 ```
 
 ### 3. Frontend Setup
@@ -114,11 +113,9 @@ npm start
 cd frontend
 npm install
 
-# Create .env
 echo "REACT_APP_API_URL=https://url-shortener-see3.onrender.com/api" > .env
 
 npm start
-# Frontend runs on http://localhost:3000
 ```
 
 ---
@@ -163,18 +160,17 @@ npm start
 ---
 
 ## 📁 Project Structure
-
 urlshort/
 ├── backend/
 │   ├── middleware/
-│   │   └── auth.js          # JWT middleware
+│   │   └── auth.js
 │   ├── models/
-│   │   ├── User.js          # User schema (bcrypt)
-│   │   └── Url.js           # URL + analytics schema
+│   │   ├── User.js
+│   │   └── Url.js
 │   ├── routes/
-│   │   ├── auth.js          # Auth endpoints
-│   │   └── urls.js          # URL CRUD + analytics
-│   ├── server.js            # Express app + redirect
+│   │   ├── auth.js
+│   │   └── urls.js
+│   ├── server.js
 │   └── .env.example
 └── frontend/
 └── src/
