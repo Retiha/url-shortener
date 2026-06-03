@@ -15,7 +15,10 @@ const app = express();
 // Security middleware
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? process.env.FRONTEND_URL : '*',
+  origin: [
+    'https://url-shortener-ge13.vercel.app',
+    'http://localhost:3000'
+  ],
   credentials: true
 }));
 app.use(morgan('dev'));
@@ -24,7 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  windowMs: 15 * 60 * 1000,
   max: 100
 });
 app.use('/api/', limiter);
@@ -54,7 +57,7 @@ app.get('/r/:code', async (req, res) => {
           <body style="font-family: sans-serif; text-align: center; padding: 60px;">
             <h1>🔗 Link Not Found</h1>
             <p>This short URL doesn't exist or has been removed.</p>
-            <a href="${process.env.FRONTEND_URL || 'http://localhost:3000'}">Go to LinkSnap</a>
+            <a href="https://url-shortener-ge13.vercel.app">Go to LinkSnap</a>
           </body>
         </html>
       `);
@@ -68,7 +71,7 @@ app.get('/r/:code', async (req, res) => {
           <body style="font-family: sans-serif; text-align: center; padding: 60px;">
             <h1>⏰ Link Expired</h1>
             <p>This short URL has expired.</p>
-            <a href="${process.env.FRONTEND_URL || 'http://localhost:3000'}">Go to LinkSnap</a>
+            <a href="https://url-shortener-ge13.vercel.app">Go to LinkSnap</a>
           </body>
         </html>
       `);
