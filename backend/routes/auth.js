@@ -27,12 +27,13 @@ router.post('/signup', async (req, res) => {
       token,
       user: { id: user._id, name: user.name, email: user.email }
     });
-  } catch (error) {
+} catch (error) {
+    console.error('SIGNUP ERROR:', error);
     if (error.name === 'ValidationError') {
       const messages = Object.values(error.errors).map(e => e.message);
       return res.status(400).json({ success: false, message: messages[0] });
     }
-    res.status(500).json({ success: false, message: 'Server error' });
+    res.status(500).json({ success: false, message: error.message });
   }
 });
 
@@ -54,8 +55,9 @@ router.post('/login', async (req, res) => {
       token,
       user: { id: user._id, name: user.name, email: user.email }
     });
-  } catch (error) {
-    res.status(500).json({ success: false, message: 'Server error' });
+} catch (error) {
+    console.error('LOGIN ERROR:', error);
+    res.status(500).json({ success: false, message: error.message });
   }
 });
 
