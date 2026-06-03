@@ -8,7 +8,7 @@ A full-stack URL shortening platform with click analytics, built for the Katomar
 
 ## 🚀 Live Demo
 
-🎥 **Demo Video:** [Paste your Loom video link here]
+🎥 **Demo Video:** https://www.loom.com/share/c75afe15358941de8a8720acdd5d2bf6
 
 🌐 **Live Frontend:** https://url-shortener-ge13.vercel.app
 
